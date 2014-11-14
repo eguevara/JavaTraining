@@ -23,6 +23,47 @@ public class StringBuilderTest {
         System.out.println(sb1);
 
 
+        /**
+         * When string builder encounters a string it treats the rest as string but the first as add
+         *
+         * sout: 12Sun45
+         *
+         * 1 2 S u n 4 5
+         * 0 1 2 3 4 5 6
+         *
+         * delete(3,6)
+         *
+         * 12S5
+         *
+         * append
+         *
+         * 12S512S5
+         */
+        sb = null;
+        sb = new StringBuilder(10 + 2 + "Sun" + 4 + 5);
+        System.out.println(sb.append(sb.delete(3, 6)));
+
+        sb = null;
+        sb = new StringBuilder(10 + 3 + 'c');  //char is convert to int and used as capacity
+        System.out.println(sb.capacity());
+        System.out.println(sb.append("erickguevara"));
+
+
+        /**
+         * the method subSequence doesn’t modify the contents of a StringBuilder.
+         *
+         * reverse modifies the value of a StringBuilder by assigning to it the reverse representation of its value.
+         */
+
+        sb = null;
+        sb = new StringBuilder("123456");
+        sb.subSequence(2, 4); // 34  + does not change the string builder!
+
+
+        sb.deleteCharAt(3); //12356 - deleteCharat is zero based
+        sb.reverse(); // 65321;
+        System.out.println(sb);
+
 
     }
 }
