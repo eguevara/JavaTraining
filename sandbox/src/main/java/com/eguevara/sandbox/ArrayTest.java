@@ -23,6 +23,44 @@ public class ArrayTest {
 
     public static void main(String[] args) {
 
+
+        /**
+         * Testing arrays with int and upper casts
+         */
+
+
+        int [] intArray = new int[6];
+
+        byte b = 1;
+        short s = 2;
+        char c = '3';
+
+        float f = 3.44F;
+        long l = 3323L;
+        double d = 34.33;
+
+
+        int i = 4;
+
+        intArray[0] = b; //ok byte
+        intArray[1] = s; //ok short
+        intArray[2] = c; //ok char
+        intArray[3] = i; //ok int
+//        intArray[4] = f; //compile error float
+//        intArray[5] = l; //compile error long
+//        intArray[6] = d; //compile error double
+
+
+        for (int thing: intArray) {
+            System.out.println(thing);
+        }
+
+        System.exit(1);
+
+
+
+
+
         MyInterface[] interfaceArray = {
                 null,
                 new MyInterface() {
