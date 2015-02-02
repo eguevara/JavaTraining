@@ -67,6 +67,10 @@ public class PrimitivesTest {
         double d = 33.33D;
 
 
+        //float f1 = 10.0; // Will not compile.. incompatible types.
+        float f2 = (float) 20.0;
+        double d1 = 20.0;
+        
         /**
          * Charactoer data type
          *
@@ -133,7 +137,33 @@ public class PrimitivesTest {
 
         int $dollar = 3; // can start with any currency char
 
+        
+        float test = 232;
 
+        {
+            test = 34;
+        }
+        
+        
+        Short sh1 = 9;
+        Integer in1 = 10;
+        
+//        if (sh1 == in1) {
+//            
+//        }
+
+        int[] a = { 2 };
+
+        a[2] = 32;
+        System.out.println(a[0]);
+        
+        
+        
+        short sh2 = 9;
+        int in2 = 10;
+        if (sh2 == in2) {
+            
+        }
 
     }
 }

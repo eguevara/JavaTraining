@@ -19,6 +19,7 @@
     - variables declared in the initilation part of the for lookp are accessible throughtout the loop's code block
 * public static void main(String [] args)
 
+
 ## 1.3 Java Basics Part 2
 
 * public static void main(String[] args)
@@ -43,6 +44,13 @@
     - At start up time, first launch the class, the static initializer block get executed first.
     - main method executes to call the no-arugment constructor
     - the anonymous code block, outside anything else in the class is a prefix to each constructor would be excuetued next (before the code insdide the constructor)
+
+#Enthuware
+
+* All non-static/instance methods in a class are implicitly passed a 'this' parameter when called.
+* The keyword 'this' can only be used within non-static methods. static methods cannot access non static fields or methods.
+* as soon as it is set to null, the object held by the reference is eligible for GC
+
 
 ## Section 2
 
@@ -101,6 +109,26 @@
     - Key methods for stringBuilder and StringBuffer are
         + append
         + insert
+  
+        
+
+#Enthuware
+* Strings
+    - substring (int number) - returns a new string of the substring
+    - substring(int begin, int end) - begin is included, end is excluded.  returns a new string
+    - indexOf(int ch) - returns the index of the first occurence of the ch found
+    - indexOf(int ch, int fromIndex) - Returns the index within this string of the first occurrence of the specified character, starting the search at the specified index.
+    - indexOf(String str) - Returns the index within this string of the first occurrence of the specified substring.
+* String class itself is final and so all of its methods are implicitly final.
+* StringBuilder
+    - append, insert, delete, substring, replace
+* Values of type boolean cannot be converted to any other types.
+* implicit narrowing and implicit widening
+
+
+
+        
+
 * 3.1 Using Operators and Decision Constructs
     - Operators
         + The value on the right is assigned to the identifier on theh left
@@ -128,6 +156,24 @@
         + The string class (as of Java se 7)
         + Wrapper classes for the primates types: Character, Byte, Short, Integer
         + Without the break statments, the execution falls through and executes each subsequent case clause including default.
+
+#Enthuware
+
+* The | operator, when applied for boolean operands, ensures that both the sides are evaluated. This is opposed to || which does not evaluate the Right Hand
+* + is overloaded such that if any one of its two operands is a String then it will convert the other operand to a String and create a new string by concatenating the two.
+* The left operand of instanceof MUST be an object and not a primitive.
+* Any two integral primitives can be compared using == operator.
+* Anything bigger than an int can NEVER be assigned to an int or anything smaller than int ( byte, char, or short) without explicit cast.
+* operands of mathematical operators are ALWAYS promoted to AT LEAST int. (i.e. for byte * byte both bytes will be first promoted to int.) and the return value will be AT LEAST int.
+*  double/float/long/boolean cannot be used in switch(...) statement.
+* Since there is a case condition that matches the input string "c", that case statement will be executed directly. This prints "cat". Since there is no break after this case statement and the next case statement, the control will fall through the next one (which is default : ) and so "none" will be printed as well.
+* long, float, double, and boolean can never be used as a switch variable.
+* Only String, byte, char, short, int, and enum values can be used as types of a switch variable. (String is allowed since Java 7.)
+* The switch variable must be big enough to hold all the case constants.
+* All case labels should be COMPILE TIME CONSTANTS.
+
+
+
 * 4 Section 4
     - Introduction to Arrays, One-Dimensisoanl Arrays
         + Elements of a single type
@@ -159,6 +205,14 @@
         + toArray() Returns an array with the same elements OR convert an arrayList to an Array
         + sample question
             * ArrayList does not change the order therfore, ArrayList.sort() would not compile as it is not a valid method.
+
+#Enthuware
+* It is named length and not size. ArrayList has a method named size() that returns the number of elements in the ArrayList. 
+* Each dimension expression is fully evaluated before any part of any dimension expression to its right.
+
+
+
+
 * Section 6 Part 1: Method Basics, Method with Arugments and Return Values, Appy Static Keyword to metohd and Fields
     - [modifers] return_type method_idenfity([arguments])
         + Method_code_block

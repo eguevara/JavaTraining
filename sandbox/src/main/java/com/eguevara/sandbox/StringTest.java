@@ -31,6 +31,16 @@ public class StringTest {
         System.out.println(string3 == string4);
         System.out.println(string3.equals(string4));
 
+        System.out.println("=====");
+
+        String s1 = "MINIMUM"; //M I N I M U M
+        System.out.println(s1.indexOf('I', 2));
+        System.out.println(s1.substring(4,7));
+        System.out.println(s1.length());
+        System.out.println(s1.indexOf("NP"));
+
+        System.out.println(new String("erick") == "erick");
+        
 
 
     }

@@ -39,8 +39,9 @@ public class StringBuilderTest {
          *
          * 12S512S5
          */
+
         sb = null;
-        sb = new StringBuilder(10 + 2 + "Sun" + 4 + 5);
+        sb = new StringBuilder(18 + 2 + "Sun" + 4 + 5); //2 0 S u n 4 5
         System.out.println(sb.append(sb.delete(3, 6)));
 
         sb = null;
@@ -63,6 +64,25 @@ public class StringBuilderTest {
         sb.deleteCharAt(3); //12356 - deleteCharat is zero based
         sb.reverse(); // 65321;
         System.out.println(sb);
+
+
+        String test = "erick";
+
+        if (test.equals("Guevara")) {
+
+            System.out.println("equals");
+        }
+        
+        StringBuilder sba1 = new StringBuilder("erick");
+        StringBuilder sba2 = new StringBuilder("guevara");
+
+        System.out.println("====");
+
+        sba1.insert(2, sba2.append('I') );
+
+        System.out.println(sba1);
+        
+
 
 
     }
