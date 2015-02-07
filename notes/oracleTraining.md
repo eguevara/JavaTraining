@@ -212,6 +212,13 @@
 
 
 
+* Section 6 Loop Constructs
+
+#Enthuware
+
+* A break statement with no label attempts to transfer control to the innermost enclosing switch, while, do, or for statement;
+* A continue statement with no label attempts to transfer control to the innermost enclosing while, do, or for statement;
+
 
 * Section 6 Part 1: Method Basics, Method with Arugments and Return Values, Appy Static Keyword to metohd and Fields
     - [modifers] return_type method_idenfity([arguments])
@@ -230,6 +237,16 @@
 * Section 6 Part 5: Passing Primitive values vs reference values.
     - ##When a primitive or object referenece value is paaed to a method, *a copy of the value is generated*
     - ##when an object reference is passed to a method, the object *is not copied but the pointer to the object is copied*
+
+
+#Enthuware
+* When the return type of the overridden method (i.e. the method in the base/super class) is a primitive, the return type of the overriding method (i.e. the method in the sub class) must match the return type of the overridden method.
+* The overriding method cannot decrease the accessibility.
+* private->'no modifier'->protected->public
+* 'protected' means the method will be accessible to all the classes in the same package and all the subclasses
+* No modifier (which is the default level) means the method will be accessible only to all the classes in the same package.
+
+
 * Section 7 Working with Inheirtence Part 1
     - Inheritance using the super and this keywords
     - ##Always use the most generic reference type possible ie
@@ -240,6 +257,10 @@
     - an abstrcct class can not be instainated
     - can also use the superclass as the reference object.
 * Section 7 Polymorphism, Interfaces Part 3
+
+#Enthuware
+
+
 * Section 8 Handling Exception - Part 1
     - Use of Exceptions in Java
         + When using java libaries that rely on external resources, the compiler will require you to handle or declare the exceptions that might occur
@@ -253,3 +274,5 @@
                     + Automatically puts a finally statment to whatever resources you put in the resouce statement. IE
                     + try (InputStream in = new FileInputStream("a.text"))
 
+#Enthuware
+* Overriding method only needs to specify a subset of the list of exception classes the overridden method can throw. A set of no classes is a valid subset of that list.
