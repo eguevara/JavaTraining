@@ -40,7 +40,10 @@ public class StringTest {
         System.out.println(s1.indexOf("NP"));
 
         System.out.println(new String("erick") == "erick");
+
+        System.out.println("eirck".length());
         
+
 
 
     }

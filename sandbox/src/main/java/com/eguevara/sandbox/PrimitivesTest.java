@@ -164,6 +164,20 @@ public class PrimitivesTest {
         if (sh2 == in2) {
             
         }
+        
+        
+        float fd = 330.0f;
+        boolean test1 = true;
+        
+        if (test1 & test1 ) {
+            
+        }
+        
+        char tst = 'c';
+        int tst2 = 34;
+        tst = 343;
+        
+        
 
     }
 }

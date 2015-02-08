@@ -51,6 +51,11 @@
 * The keyword 'this' can only be used within non-static methods. static methods cannot access non static fields or methods.
 * as soon as it is set to null, the object held by the reference is eligible for GC
 
+* Note that if no argument is passed the args parameter is NOT null but a valid non-null String array of length zero.
+* An instance member belongs to a single instance, not the class as a whole. An instance member is a member variable or a member method that belongs to a specific object instance. All non-static members are instance members.
+* static blocks of code?
+* A final variable must be initialized when an instance is constructed, or else the code will not compile. This can be done either in an instance initializer or in EVERY constructor.
+  The keyword static is used to signify that a block is static initializer. If nothing is there before starting curly brace then it is an instance initializer.
 
 ## Section 2
 
@@ -172,6 +177,14 @@
 * The switch variable must be big enough to hold all the case constants.
 * All case labels should be COMPILE TIME CONSTANTS.
 
+* boolean, long, float and double cannot be used for the case labels. Any integral type(i.e. int, char, byte, short), String, or enum can be used.
+* No two of the case constant expressions associated with a switch statement may have the same value.
+* || and && are short circuiting operation i.e. if the value of the expression can be known by just seeing the first part then the remaining part is not evaluated while | and & will always let all the parts evaluates
+* throws an ArithmeticException because of division by 0, which is caught by the catch block.
+* modulus It can be used on floating points operands also. For example, 5.5 % 3 = 2.5
+* && and || operate only on booleans.
+* & can have integral as well as boolean operands.
+
 
 
 * 4 Section 4
@@ -210,14 +223,30 @@
 * It is named length and not size. ArrayList has a method named size() that returns the number of elements in the ArrayList. 
 * Each dimension expression is fully evaluated before any part of any dimension expression to its right.
 
+* All the elements of an array of primitives are automatically initialized by default values, which is 0 for numeric types and false for boolean.
+  Therefore, ia[1] is 0.
+* If the array reference expression produces null instead of a reference to an array, then a NullPointerException is thrown at runtime, but only after all parts of the array reference expression have been evaluated and only if these evaluations completed normally.
+    - In other words, the embedded assignment of 2 to index occurs before the check for array reference produced by getArray().
+* List.subList() Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive. (If fromIndex and toIndex are equal, the returned list is empty.)
+* Difference between the placement of square brackets: 
+int[] i, j; //here i and j are both array of integers. 
+int i[], j; //here only i is an array of integers. j is just an integer.
+* Neither an ArrayList nor an array is thread safe. If you have multiple threads trying to add and remove elements from an ArrayList or an array, you have to write additional code to ensure thread safety.
 
 
-* Section 6 Loop Constructs
+
+
+
+
+* Section 5 Loop Constructs
 
 #Enthuware
 
 * A break statement with no label attempts to transfer control to the innermost enclosing switch, while, do, or for statement;
 * A continue statement with no label attempts to transfer control to the innermost enclosing while, do, or for statement;
+* In no case can the control go beyond this statement in the for loop. Therefore,  rest of the statements in the for loop are unreachable and so the code will not compile.
+
+
 
 
 * Section 6 Part 1: Method Basics, Method with Arugments and Return Values, Appy Static Keyword to metohd and Fields
@@ -246,6 +275,18 @@
 * 'protected' means the method will be accessible to all the classes in the same package and all the subclasses
 * No modifier (which is the default level) means the method will be accessible only to all the classes in the same package.
 
+* First, static statements/blocks are called IN THE ORDER they are defined. 
+Next, instance initializer statements/blocks are called IN THE ORDER they are defined. 
+Finally, the constructor is called
+* if method is abstract, so does the class need to be abstract. 
+* All methods need a body {}, unless an abstract method.
+* An abstract method cannot have a method body. {} constitutes a valid method body.
+* If you declare a field to be final, it must be explicitly initialized by the time the creation of an object of the class is complete. So you can either initialize it immediately:
+private final double ANGLE = 0;
+or you can initialize it in the constructor or an instance block.
+* The file will not compile because TC is a top level class and private is not a valid access modifier for a top level class. private and protected can be applied to an inner class. 
+A top level class (i.e. a class not defined inside any other class) can only be public or have default access.
+
 
 * Section 7 Working with Inheirtence Part 1
     - Inheritance using the super and this keywords
@@ -259,7 +300,23 @@
 * Section 7 Polymorphism, Interfaces Part 3
 
 #Enthuware
-
+* Every field declaration in the body of an interface is implicitly public, static and final. It is permitted, but strongly discouraged as a matter of style, to redundantly specify any or all of these modifiers for such fields. A constant declaration in an interface must not include any of the modifiers synchronized, transient or volatile, or a compile-time error occurs.
+* Constructor must declare all the checked exceptions declared in the base constructor (or the super classes of the checked exceptions). They may add other exception. This behavior is exactly opposite from that of methods. The overriding method cannot throw any exception other than overridden method. It may throw subclasses of those exceptions.
+* This is valid because a list of no exception is a valid subset of a list of exceptions thrown by the superclass method.
+* You cannot access c.i because i is private in B. 
+But you can access ( (A)c).i because i is public in A. 
+Remember that member variables are shadowed and not overridden. 
+So, B's i shadows A's i and since B's i is private, you can't access A's i unless you cast the reference to A. 
+You cannot access c.j because j is private in A.
+* Only methods that are inherited can be overridden and private methods are not inherited.
+* Only the methods that are not declared to be final can be overridden. 
+Further, private methods are not inherited so they cannot be overridden either.
+* A method can be overridden by defining a method with the same signature(i.e. name and parameter list) 
+and return type as the method in a superclass. 
+The return type can also be a subclass of the orginal method's return type.
+* An overriding method cannot exhibit behavior that contradicts the declaration of the original method. 
+An overriding method therefore cannot return a different type (except a subtype) or throw a wider spectrum of exceptions than the original method in the superclass.
+* Overriding method only needs to specify a subset of the list of exception classes the overridden method can throw. A set of no classes is a valid subset of that list.
 
 * Section 8 Handling Exception - Part 1
     - Use of Exceptions in Java
@@ -275,4 +332,9 @@
                     + try (InputStream in = new FileInputStream("a.text"))
 
 #Enthuware
-* Overriding method only needs to specify a subset of the list of exception classes the overridden method can throw. A set of no classes is a valid subset of that list.
+* A method that throws a 'checked' exception i.e. an exception that is not a subclass of Error or RuntimeException, either must declare it in throws clause or put the code that throws the exception in a try/catch block.
+* You are throwing an exception and there is no try or catch block, or a throws clause. So it will not compile.
+* The Exception that is thrown in the last, is the Exception that is thrown by the method to the caller.
+  So, when no exception or any exception is thrown at line 1, the control goes to finally or some catch block. Now, even if the catch blocks throws some exception, the control goes to finally. The finally block throws CloneNotSupportedException, so the method ends up throwing CloneNotSupportedException. Other exceptions thrown by the code prior to this point are lost.
+* You can only throw a Throwable using a throws clause. Exception and Error are two main subclasses of Throwable.
+* A subclass of Error cannot be caught using a catch block for Exception because java.lang.Error does not extend java.lang.Exception. 

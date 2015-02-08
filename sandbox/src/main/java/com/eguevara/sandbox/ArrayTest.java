@@ -55,10 +55,6 @@ public class ArrayTest {
             System.out.println(thing);
         }
 
-        System.exit(1);
-
-
-
 
 
         MyInterface[] interfaceArray = {
@@ -77,7 +73,6 @@ public class ArrayTest {
 
 
         System.out.println("++++++++++");
-        System.exit(1);
 
         Jump [] eJump = {null, null};
 
@@ -97,8 +92,6 @@ public class ArrayTest {
 
         System.out.println("++++++++");
 
-
-          System.exit(1);
 
 
         /**
@@ -234,11 +227,19 @@ public class ArrayTest {
         }
 
 
-        System.out.println("+++++++++++++");
+        System.out.println("+++++++++ssds++++");
 
 
 
+        
+        List s1 = new ArrayList();
+        
+        s1.add(1);
+        s1.add(3);
+        
+//        List s2 = s1;
 
+        System.out.println(s1);
 
 
 
