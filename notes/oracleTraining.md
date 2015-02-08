@@ -45,7 +45,7 @@
     - main method executes to call the no-arugment constructor
     - the anonymous code block, outside anything else in the class is a prefix to each constructor would be excuetued next (before the code insdide the constructor)
 
-#Enthuware
+#Enthuware Java Basics
 
 * All non-static/instance methods in a class are implicitly passed a 'this' parameter when called.
 * The keyword 'this' can only be used within non-static methods. static methods cannot access non static fields or methods.
@@ -56,6 +56,9 @@
 * static blocks of code?
 * A final variable must be initialized when an instance is constructed, or else the code will not compile. This can be done either in an instance initializer or in EVERY constructor.
   The keyword static is used to signify that a block is static initializer. If nothing is there before starting curly brace then it is an instance initializer.
+
+---
+
 
 ## Section 2
 
@@ -117,7 +120,7 @@
   
         
 
-#Enthuware
+#Enthuware Working with Java Data Types
 * Strings
     - substring (int number) - returns a new string of the substring
     - substring(int begin, int end) - begin is included, end is excluded.  returns a new string
@@ -130,7 +133,7 @@
 * Values of type boolean cannot be converted to any other types.
 * implicit narrowing and implicit widening
 
-
+---
 
         
 
@@ -162,8 +165,7 @@
         + Wrapper classes for the primates types: Character, Byte, Short, Integer
         + Without the break statments, the execution falls through and executes each subsequent case clause including default.
 
-#Enthuware
-
+#Enthuware  Using Operators and Decision Constructs
 * The | operator, when applied for boolean operands, ensures that both the sides are evaluated. This is opposed to || which does not evaluate the Right Hand
 * + is overloaded such that if any one of its two operands is a String then it will convert the other operand to a String and create a new string by concatenating the two.
 * The left operand of instanceof MUST be an object and not a primitive.
@@ -185,7 +187,7 @@
 * && and || operate only on booleans.
 * & can have integral as well as boolean operands.
 
-
+---
 
 * 4 Section 4
     - Introduction to Arrays, One-Dimensisoanl Arrays
@@ -219,7 +221,7 @@
         + sample question
             * ArrayList does not change the order therfore, ArrayList.sort() would not compile as it is not a valid method.
 
-#Enthuware
+#Enthuware Arrays
 * It is named length and not size. ArrayList has a method named size() that returns the number of elements in the ArrayList. 
 * Each dimension expression is fully evaluated before any part of any dimension expression to its right.
 
@@ -235,18 +237,18 @@ int i[], j; //here only i is an array of integers. j is just an integer.
 
 
 
-
+---
 
 
 * Section 5 Loop Constructs
 
-#Enthuware
+#Enthuware Loop Constructs
 
 * A break statement with no label attempts to transfer control to the innermost enclosing switch, while, do, or for statement;
 * A continue statement with no label attempts to transfer control to the innermost enclosing while, do, or for statement;
 * In no case can the control go beyond this statement in the for loop. Therefore,  rest of the statements in the for loop are unreachable and so the code will not compile.
 
-
+---
 
 
 * Section 6 Part 1: Method Basics, Method with Arugments and Return Values, Appy Static Keyword to metohd and Fields
@@ -268,7 +270,7 @@ int i[], j; //here only i is an array of integers. j is just an integer.
     - ##when an object reference is passed to a method, the object *is not copied but the pointer to the object is copied*
 
 
-#Enthuware
+#Enthuware Methods
 * When the return type of the overridden method (i.e. the method in the base/super class) is a primitive, the return type of the overriding method (i.e. the method in the sub class) must match the return type of the overridden method.
 * The overriding method cannot decrease the accessibility.
 * private->'no modifier'->protected->public
@@ -287,19 +289,20 @@ or you can initialize it in the constructor or an instance block.
 * The file will not compile because TC is a top level class and private is not a valid access modifier for a top level class. private and protected can be applied to an inner class. 
 A top level class (i.e. a class not defined inside any other class) can only be public or have default access.
 
+---
 
-* Section 7 Working with Inheirtence Part 1
+* Section 7 Working with Inheritance Part 1
     - Inheritance using the super and this keywords
     - ##Always use the most generic reference type possible ie
         + ElectroncDevice dev = new Television();
-    - When a subclass construcor does not explicitly call a super class constructor the compiler inserts an implicit call to the super class no-arg constructor
+    - When a subclass constructor does not explicitly call a super class constructor the compiler inserts an implicit call to the super class no-arg constructor
         + if the super class does not have a no-arg constructor you will get a compile-time erorr
 * Secdtin 7 Abstract Clases Part2
     - an abstrcct class can not be instainated
     - can also use the superclass as the reference object.
 * Section 7 Polymorphism, Interfaces Part 3
 
-#Enthuware
+#Enthuware Section 7 Working with Inheritance
 * Every field declaration in the body of an interface is implicitly public, static and final. It is permitted, but strongly discouraged as a matter of style, to redundantly specify any or all of these modifiers for such fields. A constant declaration in an interface must not include any of the modifiers synchronized, transient or volatile, or a compile-time error occurs.
 * Constructor must declare all the checked exceptions declared in the base constructor (or the super classes of the checked exceptions). They may add other exception. This behavior is exactly opposite from that of methods. The overriding method cannot throw any exception other than overridden method. It may throw subclasses of those exceptions.
 * This is valid because a list of no exception is a valid subset of a list of exceptions thrown by the superclass method.
@@ -318,11 +321,13 @@ The return type can also be a subclass of the orginal method's return type.
 An overriding method therefore cannot return a different type (except a subtype) or throw a wider spectrum of exceptions than the original method in the superclass.
 * Overriding method only needs to specify a subset of the list of exception classes the overridden method can throw. A set of no classes is a valid subset of that list.
 
+---
+
 * Section 8 Handling Exception - Part 1
     - Use of Exceptions in Java
-        + When using java libaries that rely on external resources, the compiler will require you to handle or declare the exceptions that might occur
+        + When using java libraries that rely on external resources, the compiler will require you to handle or declare the exceptions that might occur
             * Handling an exceptions means add code in the code block
-            * Delcare that the method may fail to execute successfully
+            * Declare that the method may fail to execute successfully
         + Throwable is a special type of Java object
             * Error
             * Exception
@@ -331,7 +336,7 @@ An overriding method therefore cannot return a different type (except a subtype)
                     + Automatically puts a finally statment to whatever resources you put in the resouce statement. IE
                     + try (InputStream in = new FileInputStream("a.text"))
 
-#Enthuware
+#Enthuware Handling Exception
 * A method that throws a 'checked' exception i.e. an exception that is not a subclass of Error or RuntimeException, either must declare it in throws clause or put the code that throws the exception in a try/catch block.
 * You are throwing an exception and there is no try or catch block, or a throws clause. So it will not compile.
 * The Exception that is thrown in the last, is the Exception that is thrown by the method to the caller.
