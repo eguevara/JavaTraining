@@ -50,13 +50,22 @@
 * All non-static/instance methods in a class are implicitly passed a 'this' parameter when called.
 * The keyword 'this' can only be used within non-static methods. static methods cannot access non static fields or methods.
 * as soon as it is set to null, the object held by the reference is eligible for GC
-
+---
 * Note that if no argument is passed the args parameter is NOT null but a valid non-null String array of length zero.
 * An instance member belongs to a single instance, not the class as a whole. An instance member is a member variable or a member method that belongs to a specific object instance. All non-static members are instance members.
 * static blocks of code?
 * A final variable must be initialized when an instance is constructed, or else the code will not compile. This can be done either in an instance initializer or in EVERY constructor.
   The keyword static is used to signify that a block is static initializer. If nothing is there before starting curly brace then it is an instance initializer.
-
+---
+* A non public class may exist in any file. This implies that there can be only one public class in a file.
+* class main's main method will be executed. final is a valid modifier for the standard main method. 
+* static and final are valid modifiers for both member field and method declarations within a class. 
+transient and volatile modifiers are only valid for member field declarations. 
+abstract and native are only valid for member methods.
+* The order of the static and public keywords is irrelevant. But the return type should always come just before the method name.  
+Applying final to the method does not change the method signature.
+* 1. An object can be made eligible for garbage collection by making sure there are no references pointing to that object.
+  2. You cannot directly invoke the garbage collector. You can suggest the JVM to perform garbage collection by calling System.gc();
 ---
 
 
@@ -132,8 +141,10 @@
     - append, insert, delete, substring, replace
 * Values of type boolean cannot be converted to any other types.
 * implicit narrowing and implicit widening
-
 ---
+* So, if you have, Object o = null; System.out.println(o); will print null and will not throw a NullPointerException.
+* Note that + operator is overloaded for String. So if you have a String as any operand for +, a new combined String will be created by concatenating the values of both the operands. Therefore, x+y will result in a String that concatenates integer x and String y.
+* We have to explicitly initialize local variables other wise they remain uninitialized and it will be a compile time error if such variables are accessed without getting initialized.
 
         
 
@@ -178,7 +189,7 @@
 * Only String, byte, char, short, int, and enum values can be used as types of a switch variable. (String is allowed since Java 7.)
 * The switch variable must be big enough to hold all the case constants.
 * All case labels should be COMPILE TIME CONSTANTS.
-
+---
 * boolean, long, float and double cannot be used for the case labels. Any integral type(i.e. int, char, byte, short), String, or enum can be used.
 * No two of the case constant expressions associated with a switch statement may have the same value.
 * || and && are short circuiting operation i.e. if the value of the expression can be known by just seeing the first part then the remaining part is not evaluated while | and & will always let all the parts evaluates
@@ -186,8 +197,22 @@
 * modulus It can be used on floating points operands also. For example, 5.5 % 3 = 2.5
 * && and || operate only on booleans.
 * & can have integral as well as boolean operands.
-
 ---
+* Note that none of the parameters is a String so conversion to String will not happen. The following are the error messages given by the compiler.
+* 3. Expand the += operator as: k = k + 3 + ++k; from (k += 3 + ++k;)
+* Neither the switch expression nor the case labels can be of type boolean.
+* Note that both equals() and hashCode() methods can be overridden by the programmer so you can't say anything about what they will return without looking at the code.
+* Code 3 is invalid because a switch statement must have a body. The body may even be empty as shown in Code 4.
+* All operands of type byte, char or short are promoted AT LEAST to an int before performing mathematical operations. 
+If one of the operands is larger than an int then the other one is promoted to the same type. 
+Note that System.out.println((float)5/4); will print 1.25. If you remove the explicit cast (float), it will print 1.
+* x is an int and int is perfectly valid. long, double, boolean, and float are not valid.
+* a += (a =4) is same as a = a + (a=4).
+
+
+
+
+
 
 * 4 Section 4
     - Introduction to Arrays, One-Dimensisoanl Arrays
@@ -234,10 +259,16 @@
 int[] i, j; //here i and j are both array of integers. 
 int i[], j; //here only i is an array of integers. j is just an integer.
 * Neither an ArrayList nor an array is thread safe. If you have multiple threads trying to add and remove elements from an ArrayList or an array, you have to write additional code to ensure thread safety.
-
-
-
 ---
+* Note that whenever you create an array all of its elements are automatically given defaults values. Numeric types are initialized to 0, objects are initialized to null, and booleans to false.
+  
+  So if you have, float[ ] f = new float[3]; f[0], f[1] and f[2] will all be 0.0.
+  
+* This is perfectly valid. You can have any number of comma separated statements in initialization and incrementation part. The condition part must contain a single expression that returns a boolean.
+  All a for loop needs is two semi colons :-
+  for( ; ; ) {} This is a valid for loop that never ends. A more concise form for the same is : for( ; ; );
+  
+  
 
 
 * Section 5 Loop Constructs
@@ -303,8 +334,13 @@ A top level class (i.e. a class not defined inside any other class) can only be 
 * Section 7 Polymorphism, Interfaces Part 3
 
 #Enthuware Section 7 Working with Inheritance
-* Every field declaration in the body of an interface is implicitly public, static and final. It is permitted, but strongly discouraged as a matter of style, to redundantly specify any or all of these modifiers for such fields. A constant declaration in an interface must not include any of the modifiers synchronized, transient or volatile, or a compile-time error occurs.
-* Constructor must declare all the checked exceptions declared in the base constructor (or the super classes of the checked exceptions). They may add other exception. This behavior is exactly opposite from that of methods. The overriding method cannot throw any exception other than overridden method. It may throw subclasses of those exceptions.
+* Every field declaration in the body of an interface is implicitly public, static and final. 
+It is permitted, but strongly discouraged as a matter of style, to redundantly specify any or all of these modifiers for such fields. 
+A constant declaration in an interface must not include any of the modifiers synchronized, transient or volatile, or a compile-time error occurs.
+* Constructor must declare all the checked exceptions declared in the base constructor (or the super classes of the checked exceptions). 
+They may add other exception. 
+This behavior is exactly opposite from that of methods. 
+The overriding method cannot throw any exception other than overridden method. It may throw subclasses of those exceptions.
 * This is valid because a list of no exception is a valid subset of a list of exceptions thrown by the superclass method.
 * You cannot access c.i because i is private in B. 
 But you can access ( (A)c).i because i is public in A. 
@@ -320,8 +356,18 @@ The return type can also be a subclass of the orginal method's return type.
 * An overriding method cannot exhibit behavior that contradicts the declaration of the original method. 
 An overriding method therefore cannot return a different type (except a subtype) or throw a wider spectrum of exceptions than the original method in the superclass.
 * Overriding method only needs to specify a subset of the list of exception classes the overridden method can throw. A set of no classes is a valid subset of that list.
-
 ---
+* The point to understand here is, b is declared to be a reference of class Base and methodB() is not defined in Base. 
+So the compiler cannot accept the statement b.methodB() because it only verifies the validity of a call by looking at the declared class of the reference. 
+For example, the compiler is able to verify that b.methodA() is a valid call because class Base has method methodA. 
+But it does not "bind" the call. Call binding is done at runtime by the jvm and the jvm looks for the actual class of object referenced by the variable before invoking the method.
+* An overriding method can be made less restrictive than the overridden method. The restrictiveness of access modifiers is as follows:
+  private>default>protected>public (where private is most restrictive and public is least restrictive).
+
+  Note that there is no modifier named default. The absence of any access modifiers implies default access.
+* By default all the methods of an interface are public and abstract so there is no need to explicitly specify the "abstract" keyword for the draw() method if you make Shape an interface. 
+But it is not wrong to do so.
+
 
 * Section 8 Handling Exception - Part 1
     - Use of Exceptions in Java
@@ -343,3 +389,7 @@ An overriding method therefore cannot return a different type (except a subtype)
   So, when no exception or any exception is thrown at line 1, the control goes to finally or some catch block. Now, even if the catch blocks throws some exception, the control goes to finally. The finally block throws CloneNotSupportedException, so the method ends up throwing CloneNotSupportedException. Other exceptions thrown by the code prior to this point are lost.
 * You can only throw a Throwable using a throws clause. Exception and Error are two main subclasses of Throwable.
 * A subclass of Error cannot be caught using a catch block for Exception because java.lang.Error does not extend java.lang.Exception. 
+---
+* SecurityException extends RuntimeException: Usually thrown by the JVM.  
+It is thrown by the security manager upon security violation. 
+For example, when a java program runs in a sandbox (such as an applet) and it tries to use prohibited APIs such as File I/O, the security manager throws this exception.
