@@ -67,7 +67,14 @@ Applying final to the method does not change the method signature.
 * 1. An object can be made eligible for garbage collection by making sure there are no references pointing to that object.
   2. You cannot directly invoke the garbage collector. You can suggest the JVM to perform garbage collection by calling System.gc();
 ---
+* The order of keywords for a static import must be "import static ... ". 
+You can either import all the static members using import static java.lang.Integer.* 
+or one specific member using import static java.lang.Integer.MAX_VALUE; 
 
+You must specify the full package name of the class that you are importing (just like the regular import statement). 
+So, import static Integer.*; is wrong.
+* double x=10, double y;  //3 // 3 is invalid syntax. It can be written as either double x=10; double y;  or double x=10, y;
+* static methods can't be abstract.
 
 ## Section 2
 
@@ -145,7 +152,11 @@ Applying final to the method does not change the method signature.
 * So, if you have, Object o = null; System.out.println(o); will print null and will not throw a NullPointerException.
 * Note that + operator is overloaded for String. So if you have a String as any operand for +, a new combined String will be created by concatenating the values of both the operands. Therefore, x+y will result in a String that concatenates integer x and String y.
 * We have to explicitly initialize local variables other wise they remain uninitialized and it will be a compile time error if such variables are accessed without getting initialized.
-
+---
+* A byte can ALWAYS be assigned to an int.
+* Range of byte is -128 to 127
+* Observe that rounding is a standard mathematical procedure where the number that lies exactly between two numbers always rounds up to the higher one. 
+So .5 rounds to 1 and -.5 rounds to 0.
         
 
 * 3.1 Using Operators and Decision Constructs
@@ -208,8 +219,17 @@ If one of the operands is larger than an int then the other one is promoted to t
 Note that System.out.println((float)5/4); will print 1.25. If you remove the explicit cast (float), it will print 1.
 * x is an int and int is perfectly valid. long, double, boolean, and float are not valid.
 * a += (a =4) is same as a = a + (a=4).
+--
+* Note that  boolean operators have more precedence than =. (In fact, = has least precedence of all operators.)
+* This will not compile because a short VARIABLE can NEVER be assigned to a char without explicit casting. A short CONSTANT can be assigned to a char only if the value fits into a char.
 
+  short s = 1; byte b = s; => this will also not compile because although value is small enough to be held by a byte but the Right Hand Side i.e. s is a variable and not a constant.
+  final short s = 1; byte b = s; => This is fine because s is a constant and the value fits into a byte.
+  final short s = 200; byte b = s; => This is invalid because although s is a constant but the value does not fit into a byte.
 
+  Implicit narrowing occurs only for byte, char, short, and int. Remember that it does not occur for long, float, or double. So, this will not compile: int i = 129L;
+
+* Note that the program ends with ExceptionInInitializerError because any exception thrown in a static block is wrapped into ExceptionInInitializerError and then that ExceptionInInitializerError is thrown.
 
 
 
@@ -278,8 +298,9 @@ int i[], j; //here only i is an array of integers. j is just an integer.
 * A break statement with no label attempts to transfer control to the innermost enclosing switch, while, do, or for statement;
 * A continue statement with no label attempts to transfer control to the innermost enclosing while, do, or for statement;
 * In no case can the control go beyond this statement in the for loop. Therefore,  rest of the statements in the for loop are unreachable and so the code will not compile.
-
 ---
+* continue can be used only inside a 'for', 'while' or 'do while' loop.
+
 
 
 * Section 6 Part 1: Method Basics, Method with Arugments and Return Values, Appy Static Keyword to metohd and Fields
@@ -319,8 +340,10 @@ private final double ANGLE = 0;
 or you can initialize it in the constructor or an instance block.
 * The file will not compile because TC is a top level class and private is not a valid access modifier for a top level class. private and protected can be applied to an inner class. 
 A top level class (i.e. a class not defined inside any other class) can only be public or have default access.
-
 ---
+*  A constructor cannot be final, static or abstract.
+
+
 
 * Section 7 Working with Inheritance Part 1
     - Inheritance using the super and this keywords
@@ -367,6 +390,28 @@ But it does not "bind" the call. Call binding is done at runtime by the jvm and 
   Note that there is no modifier named default. The absence of any access modifiers implies default access.
 * By default all the methods of an interface are public and abstract so there is no need to explicitly specify the "abstract" keyword for the draw() method if you make Shape an interface. 
 But it is not wrong to do so.
+---
+* Classes do not extend interfaces, they implement interfaces.
+* Interfaces do not implement anything, they can extend multiple interfaces.
+* The getValue(int i) method of class B in option c, is different than the method defined in the interface because their parameters are different. 
+Therefore, this class does not actually implement the method of the interface and that is why it needs to be declared abstract.
+* It will not compile because the class of reference s is Speak, which does not have the method up().
+* Since the constructor of Bird is private, the subclass cannot access it and therefore, 
+it needs to be made public. protected or default access is also valid.
+* Return type may also be a subclass/subinterface. 
+So it can also return SortedSet, TreeSet, HashSet, or any other class that implements or subclasses a Set.
+* Since the original (overridden) method does not have any throws clause, the overriding method cannot declare any checked exceptions.
+* A method can throw any RuntimeException (such as a NullPointerException) even without declaring it in its throws clause.
+* As a rule, fields defined in an interface are public, static, and final. (The methods are public and abstract.)
+
+Here, the interface IInt defines 'thevalue' and thus any class that implements this interface inherits this field. 
+Therefore, it can be accessed using s.thevalue or just 'thevalue' inside the class. 
+Also, since it is static, it can also be accessed using IInt.thevalue or Sample.thevalue.
+* Note that when a method returns objects (as opposed to primitives, 
+like in this question), the principle of covariant returns applies. 
+Meaning, the overriding method is allowed to return a subclass of the return type defined in the overridden method. 
+Thus, if a base class's method is: public A m(); then a subclass is free to override it with: public A1 m(); if A1 extends A.
+
 
 
 * Section 8 Handling Exception - Part 1
@@ -393,3 +438,18 @@ But it is not wrong to do so.
 * SecurityException extends RuntimeException: Usually thrown by the JVM.  
 It is thrown by the security manager upon security violation. 
 For example, when a java program runs in a sandbox (such as an applet) and it tries to use prohibited APIs such as File I/O, the security manager throws this exception.
+---
+* Any exception that extends java.lang.Exception but is not a subclass of java.lang.RuntimeException is a checked exception.
+* You can use Throwable as well as Exception as both of them are super classes of MyException. 
+RuntimeException (and its subclasses such as NullPointerException and ArrayIndexOutOfBoundsException) is not a checked exception. 
+So it cannot cover for MyException which is a checked exception. 
+You cannot use Error as well because it is not in the hierarchy of MyException, which is 
+Object <- Throwable <- Exception <- MyException.
+* java.lang.Exception is a checked Exception. 
+**Which means, the method that throws this exception must declare it in the throws clause.**
+Hence, yourMethod must declare throws Exception in its throws clause.  
+
+Now, since the call to yourMethod in myMethod can also potentially throw an exception, myMethod must also declare it in its throws clause. 
+By the same logic, main method should also declare it in its throws clause.
+*1. Even if the program is executed without any arguments, the 'args' is NOT NULL. In such case it will be initialized to an array of Strings containing zero elements.
+ 2. The finally block is always executed, no matter how control leaves the try block. Only if, in a try or catch block, System.exit() is called then finally will not be executed.
