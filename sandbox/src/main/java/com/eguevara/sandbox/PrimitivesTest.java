@@ -12,6 +12,8 @@ public class PrimitivesTest {
  */
 
 
+    static char erc;
+
     public static void main(String[] args) {
 
 
@@ -48,6 +50,9 @@ public class PrimitivesTest {
         long l = 33L; //Size 64 bits.
 
         int octVal = 0_143;
+        
+        b = (byte) i;
+        
 
 
 
@@ -85,6 +90,11 @@ public class PrimitivesTest {
 
 //        i = c2; // can assign char to int
 
+        System.out.println((int) PrimitivesTest.erc);
+        System.out.println("erickd");
+        
+        
+        
 
 
         System.out.println(c +  c1);

@@ -51,6 +51,25 @@ So, import static Integer.*; is wrong.
 * Range of byte is -128 to 127
 * Observe that rounding is a standard mathematical procedure where the number that lies exactly between two numbers always rounds up to the higher one. 
 So .5 rounds to 1 and -.5 rounds to 0.
+---
+* public StringBuilder(int capacity)
+Constructs a string builder with no characters in it and an initial capacity specified by the capacity argument.
+* public void ensureCapacity(int minimumCapacity) on stringBuilder
+  Ensures that the capacity is at least equal to the specified minimum.
+* StringBuilder or String has not clear(), empty(), removeAll(), deleteAll()
+* "343434".charAt(39). 
+As per the API documentation for charAt, it throws IndexOutOfBoundsException 
+if you pass an invalid value (that is, if the index argument is negative or not less than the length of this string).
+* This will not compile because String is a final class and final classes cannot be extended. 
+There are questions on this aspect in the exam and so you should remember that StringBuffer and StringBuilder are also final. 
+All Primitive wrappers are also final (i.e. Boolean, Integer, Byte etc). java.lang.System is also final.
+* Not all short values are valid char values, and neither are all char values valid short values, 
+therefore compiler complains for both the lines 2 and 3. They will require an explicit cast.
+* This is invalid because the floating point suffices f, F or d, D are used only when using decimal system or hexadecimal and not while using binary.
+* A floating point number written in binary cannot use any suffix. But a floating point number written in decimal or hex can use the floating point suffices f, F, d, and D.
+* This question tests your knowledge on the default values of uninitialized primitives and object references. 
+booleans are initialized to false, numeric types to 0 and object references to null. 
+Elements of arrays are initialized to the default values of their types. So, elements of a boolean array are initialized to false. int, char, float to 0 and Objects to null.
 
 #Enthuware  Using Operators and Decision Constructs
 * The | operator, when applied for boolean operands, ensures that both the sides are evaluated. This is opposed to || which does not evaluate the Right Hand
@@ -95,6 +114,10 @@ Note that System.out.println((float)5/4); will print 1.25. If you remove the exp
   Implicit narrowing occurs only for byte, char, short, and int. Remember that it does not occur for long, float, or double. So, this will not compile: int i = 129L;
 
 * Note that the program ends with ExceptionInInitializerError because any exception thrown in a static block is wrapped into ExceptionInInitializerError and then that ExceptionInInitializerError is thrown.
+---
+* Remember that the args array is never null. If the program is run without any arguments, args points to a String array of length 0. Therefore, hasParams will be true and it will print "has params".
+* & and | do not short circuit the expression but && and || do.
+
 
 #Enthuware Arrays
 * It is named length and not size. ArrayList has a method named size() that returns the number of elements in the ArrayList. 
@@ -125,6 +148,19 @@ int i[], j; //here only i is an array of integers. j is just an integer.
 * In no case can the control go beyond this statement in the for loop. Therefore,  rest of the statements in the for loop are unreachable and so the code will not compile.
 ---
 * continue can be used only inside a 'for', 'while' or 'do while' loop.
+---
+* while (false) { x=3; } is a compile-time error because the statement x=3; 
+is not reachable; Similarly, for( int i = 0; false; i++) x = 3; is also a compile time error because x= 3 is unreachable.  
+
+In if(false){ x=3; }, although the body of the condition is unreachable, 
+this is not an error because the JLS explicitly defines this as an exception to the rule. 
+It allows this construct to support optimizations through the conditional compilation. 
+For example,  if(DEBUG){ System.out.println("beginning task 1"); }   
+Here, the DEBUG variable can be set to false in the code while generating the production version of the class file, 
+which will allow the compiler to optimize the code by removing the whole if statement entirely from the class file.
+* Cannot use an existing/predefined variable in the variable declaration part.
+* final is the only modifier (excluding annotations) that is allowed here.
+
 
 #Enthuware Methods
 * When the return type of the overridden method (i.e. the method in the base/super class) is a primitive, the return type of the overriding method (i.e. the method in the sub class) must match the return type of the overridden method.
@@ -146,6 +182,19 @@ or you can initialize it in the constructor or an instance block.
 A top level class (i.e. a class not defined inside any other class) can only be public or have default access.
 ---
 *  A constructor cannot be final, static or abstract.
+* In cases where multiple methods are applicable, the compiler always calls the most specific one. 
+In this case, the third one is the most specific one. 
+* The reason is quite simple, the most specific method depending upon the argument is called. 
+Here, null can be passed to all the 3 methods but FileNotFoundException class is the subclass of IOException which in turn is the subclass of Object. 
+So, FileNotFoundException class is the most specific class. 
+So, this method is called. Had there been two most specific methods, 
+it would not even compile as the compiler will not be able to determine which method to call.
+* To allow a method to take variable arguments of a type, you must use the ... syntax: methodName( <type>... variableName); 
+Remember that there can be only one vararg argument in a method. 
+Further, the vararg argument must be the last argument. 
+So this is invalid: stringProcessor( String... variableName, int age); 
+but this is valid: stringProcessor(int age, String... variableName);
+
 
 #Enthuware Section 7 Working with Inheritance
 * Every field declaration in the body of an interface is implicitly public, static and final.
@@ -202,6 +251,13 @@ Also, since it is static, it can also be accessed using IInt.thevalue or Sample.
 like in this question), the principle of covariant returns applies.
 Meaning, the overriding method is allowed to return a subclass of the return type defined in the overridden method.
 Thus, if a base class's method is: public A m(); then a subclass is free to override it with: public A1 m(); if A1 extends A.
+---
+* Any field in an interface is implicitly public, static, and final, whether these keywords are specified or not.
+* 1. The overriding method must have same return type in case of primitives (a subclass is allowed in case of classes)  
+   
+  2. The overriding method can throw a subset of the exception or subclass of the exceptions thrown by the overridden class. 
+  Having no throws clause is also valid since an empty set is a valid subset. 
+
 
 #Enthuware Handling Exception
 * A method that throws a 'checked' exception i.e. an exception that is not a subclass of Error or RuntimeException, either must declare it in throws clause or put the code that throws the exception in a try/catch block.
@@ -229,3 +285,6 @@ Now, since the call to yourMethod in myMethod can also potentially throw an exce
 By the same logic, main method should also declare it in its throws clause.
 *1. Even if the program is executed without any arguments, the 'args' is NOT NULL. In such case it will be initialized to an array of Strings containing zero elements.
  2. The finally block is always executed, no matter how control leaves the try block. Only if, in a try or catch block, System.exit() is called then finally will not be executed.
+---
+* A method declaring that it throws a certain exception class may throw instances of any subclass of that exception class.
+* A NullPointerException will be thrown if the expression given to the throw statement results in a null pointer. 
