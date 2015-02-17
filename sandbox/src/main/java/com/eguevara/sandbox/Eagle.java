@@ -3,6 +3,22 @@ package com.eguevara.sandbox;
 /**
  * Created by erickguevara on 2/14/15.
  */
+
+
+
+interface T1{
+}
+interface T2{
+    int VALUE = 10;
+    void m1();
+}
+
+interface T3 extends T1, T2{
+    public void m1();
+    public void m1(int x);
+}
+
+
 class Eagle {
 
     
@@ -11,15 +27,24 @@ class Eagle {
         
     }
     
-    static char c;
-    static boolean[] ba = new boolean[1];
+    public float [] charTest = new float[2];
+    public String stringTest;
+    public float float3;
     
     public static void main(String[] args) {
-        System.out.println("erick");
-//        crazyLoop3();
-        System.out.println(c);
 
-        System.out.println(ba[c]);
+        System.out.println();
+        
+        Eagle eg = new Eagle();
+        
+        for (float i : eg.charTest){
+            System.out.println(i + " - erick");
+        }
+
+        System.out.println(eg.stringTest);
+        System.out.println(eg.float3);
+        
+
     }
     
     static void crazyLoop2() {

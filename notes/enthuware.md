@@ -197,6 +197,10 @@ but this is valid: stringProcessor(int age, String... variableName);
 
 
 #Enthuware Section 7 Working with Inheritance
+* Fields defined in an interface are ALWAYS considered as public, static, and final. 
+(Methods are public and abstract.) Even if you don't explicitly define them as such. 
+In fact, you cannot even declare a field to be private or protected in an interface. 
+Therefore, you cannot assign any value to 'type' outside the interface definition.
 * Every field declaration in the body of an interface is implicitly public, static and final.
 It is permitted, but strongly discouraged as a matter of style, to redundantly specify any or all of these modifiers for such fields.
 A constant declaration in an interface must not include any of the modifiers synchronized, transient or volatile, or a compile-time error occurs.
