@@ -70,6 +70,9 @@ therefore compiler complains for both the lines 2 and 3. They will require an ex
 * This question tests your knowledge on the default values of uninitialized primitives and object references. 
 booleans are initialized to false, numeric types to 0 and object references to null. 
 Elements of arrays are initialized to the default values of their types. So, elements of a boolean array are initialized to false. int, char, float to 0 and Objects to null.
+---
+* 2ndArgument is not a valid identifier name because an identifier must not start with a digit (although it can contain a digit.) 
+An identifier may start with and contain the underscore character _.
 
 #Enthuware  Using Operators and Decision Constructs
 * The | operator, when applied for boolean operands, ensures that both the sides are evaluated. This is opposed to || which does not evaluate the Right Hand

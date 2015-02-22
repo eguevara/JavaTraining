@@ -33,18 +33,29 @@ class Eagle {
     
     public static void main(String[] args) {
 
-        System.out.println();
-        
-        Eagle eg = new Eagle();
-        
-        for (float i : eg.charTest){
-            System.out.println(i + " - erick");
+        int i=0, j=0;
+        X1: for(i = 0; i < 3; i++){
+            X2: for(j = 3; j > 0; j--){
+                if(i < j) continue X1;
+                else break X2;
+            }
         }
+        System.out.println(i+" "+j);
 
-        System.out.println(eg.stringTest);
-        System.out.println(eg.float3);
+
+    }
+    
+    static void crazyLoop4() {
+        outer:
+        for ( int i = 0 ; i<3 ; i++ ){
+            for ( int j = 0 ; j<2 ; j++ ){
+                if ( i == j ){
+                    continue outer;
+                }
+                System.out.println( "i=" + i + " , j=" + j );
+            }
+        }
         
-
     }
     
     static void crazyLoop2() {

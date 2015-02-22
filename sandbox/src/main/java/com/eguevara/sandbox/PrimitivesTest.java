@@ -163,9 +163,7 @@ public class PrimitivesTest {
 //        }
 
         int[] a = { 2 };
-
-        a[2] = 32;
-        System.out.println(a[0]);
+        
         
         
         
@@ -186,14 +184,13 @@ public class PrimitivesTest {
         char tst = 'c';
         int tst2 = 34;
         tst = 343;
+
+        System.out.println("-------");
+
+
+
+        System.out.println("34343".charAt(3));
         
-
-
-        float f22 = 123_345_667F;
-
-        long y = 123_456_L;
-        
-        char testw = 8;
         
 
     }
